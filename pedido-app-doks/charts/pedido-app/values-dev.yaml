@@ -1,0 +1,17 @@
+image:
+  backend:
+    repository: juandi1935/pedido-backend
+    tag: "dev2"
+  frontend:
+    repository: juandi1935/pedido-frontend   # si ya tienes tu front
+    tag: "dev"                                # o deja nginx:alpine si aún no
+# ingress.host ya está correcto para dev
+
+
+ingress:
+  host: "dev.138.197.226.165.sslip.io"
+
+secrets:
+  db:
+    postgresPassword: "postgres-dev-123"
+    userPassword: "pedido-dev-123"

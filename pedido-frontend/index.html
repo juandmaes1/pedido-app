@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Pedido App</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body{font-family:system-ui;max-width:520px;margin:40px auto;padding:0 16px}
+    h1{margin-bottom:12px}
+    input,button{font-size:16px;padding:8px}
+    input{width:100%;max-width:340px}
+    button{margin-left:8px}
+    #msg{margin:8px 0 16px;color:#155724;background:#d4edda;padding:6px 8px;border-radius:6px;display:none}
+    ul{padding-left:18px}
+    li{margin:4px 0}
+  </style>
+</head>
+<body>
+  <h1>Guardar nombre</h1>
+  <div>
+    <input id="name" placeholder="Escribe tu nombre" />
+    <button id="save">Guardar</button>
+  </div>
+  <div id="msg">Guardado ✅</div>
+  <h3>Usuarios</h3>
+  <ul id="list"></ul>
+
+  <script>
+    async function load() {
+      const r = await fetch('/api/users');
+      if (!r.ok) { console.error('GET /api/users', r.status); return; }
+      const data = await r.json();
+      document.getElementById('list').innerHTML =
+        data.map(u => `<li>${u.id}: ${u.name}</li>`).join('');
+    }
+
+    document.getElementById('save').onclick = async () => {
+      const name = document.getElementById('name').value.trim();
+      if (!name) { alert('Escribe un nombre'); return; }
+      const r = await fetch('/api/users', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ name })
+      });
+      if (r.ok) {
+        document.getElementById('msg').style.display = 'block';
+        setTimeout(()=>document.getElementById('msg').style.display='none',1500);
+        document.getElementById('name').value = '';
+        load();
+      } else {
+        alert('Error guardando');
+      }
+    };
+
+    load();
+  </script>
+</body>
+</html>

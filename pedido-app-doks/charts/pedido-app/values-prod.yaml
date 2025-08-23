@@ -1,0 +1,14 @@
+image:
+  backend:
+    tag: "prod"
+  frontend:
+    tag: "prod"
+replicaCount:
+  backend: 2
+  frontend: 2
+ingress:
+  host: "app.138.197.226.165.sslip.io"
+secrets:
+  db:
+    postgresPassword: "postgres-prod-123"
+    userPassword: "pedido-prod-123"
