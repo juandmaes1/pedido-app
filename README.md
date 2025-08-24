@@ -1,5 +1,8 @@
 # README – Despliegue con Helm + ArgoCD - Parcial Patrones Arquitectónicos Avanzados
 
+Juan Diego Martínez
+Ricardo Plazas
+
 Este documento explica cómo instalar y gestionar el despliegue completo de la aplicación pedido-app usando Helm y ArgoCD. La aplicación está compuesta por:
 
 * Base de datos: PostgreSQL (chart oficial de Bitnami).
